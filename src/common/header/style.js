@@ -47,18 +47,6 @@ export const NavItem = styled.div`
 export const SearchWrapper = styled.div`
   position: relative;
   float: left;
-  .slide-enter {
-    transition: all .3s ease-out;
-  }
-  .slide-enter-active {
-    width: 300px;
-  }  
-  .slide-exit {
-    transition: all .3s ease-out;
-  }
-  .slide-exit-active {
-    width: 160px;
-  }
   .iconfont {
     position: absolute;
     right: 5px;
@@ -95,6 +83,36 @@ export const NavSearch = styled.input.attrs({
   &.focused {
     width: 300px;
   }
+  &.slide-enter {
+    transition: all .3s ease-out;
+  }
+  &.slide-enter-active {
+    width: 300px;
+  }  
+  &.slide-exit {
+    transition: all .3s ease-out;
+  }
+  &.slide-exit-active {
+    width: 160px;
+  }
+`;
+
+export const SearchInfo = styled.div`
+  position: absolute;
+  left: 0;
+  top: 56px;
+  width: 300px;
+  padding: 0 20px;
+  height: 100px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+`;
+
+export const SearchInfoTitle = styled.div`
+  margin-top: 20px;
+  margin-bottom: 15px;
+  line-height: 20px;
+  font-size: 14px;
+  color: #969696;
 `;
 
 export const Addition = styled.div`
