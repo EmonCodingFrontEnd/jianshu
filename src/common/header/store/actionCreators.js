@@ -8,10 +8,8 @@ export const searchFocus = () => ({
 export const searchBlur = () => ({
   type: constants.SEARCH_BLUR
 });
-export const changeList = (data) => ({
-  type: constants.CHANGE_LIST,
-  data: fromJS(data)
-});
+
+
 export const getList = () => {
   return (dispatch) => {
     axios.get('/api/headerList.json')
@@ -24,3 +22,9 @@ export const getList = () => {
     });
   }
 };
+
+
+const changeList = (data) => ({
+  type: constants.CHANGE_LIST,
+  data: fromJS(data)
+});
