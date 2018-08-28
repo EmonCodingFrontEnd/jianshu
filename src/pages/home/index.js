@@ -11,6 +11,7 @@ class Home extends Component {
       <HomeWrapper>
         <HomeLeft>
           <img className={'banner-img'}
+               alt={''}
                src={'//upload.jianshu.io/admin_banners/web_images/4429/b46c9ab6fc30d375505aa121ee5a73510880dcff.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/1250/h/540'}/>
           <Topic/>
           <List/>
