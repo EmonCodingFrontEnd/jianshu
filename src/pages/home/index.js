@@ -1,13 +1,17 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import Topic from './component/Topic';
 import List from './component/List';
 import Recommend from './component/Recommend';
 import Writer from './component/Writer';
-import axios from 'axios';
-import {HomeWrapper, HomeLeft, HomeRight} from './style';
+import {actionCreators} from './store';
+import {HomeWrapper, HomeLeft, HomeRight, BackTop} from './style';
 
-class Home extends Component {
+class Home extends PureComponent {
+  handleScrollTop() {
+    window.scrollTo(0, 0);
+  }
+
   render() {
     return (
       <HomeWrapper>
@@ -22,28 +26,43 @@ class Home extends Component {
           <Recommend/>
           <Writer/>
         </HomeRight>
+        {
+          this.props.showScroll ? <BackTop onClick={this.handleScrollTop}>顶部</BackTop> : null
+        }
       </HomeWrapper>
     )
   }
 
   componentDidMount() {
-    axios.get('/api/home.json').then((res) => {
-      const result = res.data.data;
-      const action = {
-        type: 'change_home_data',
-        topicList: result.topicList,
-        articleList: result.articleList,
-        recommendList: result.recommendList
-      };
-      this.props.changeHomeData(action);
-    })
+    this.props.changeHomeData();
+    this.bindEvents();
+  }
+
+  bindEvents() {
+    window.addEventListener('scroll', this.props.changeScrollTopShow)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.props.changeScrollTopShow)
   }
 }
 
+const mapState = (state) => {
+  return {
+    showScroll: state.getIn(['home', 'showScroll']),
+  }
+};
 
 const mapDispatch = (dispatch) => ({
-  changeHomeData(action) {
-    dispatch(action);
+  changeHomeData() {
+    dispatch(actionCreators.getHomeInfo());
+  },
+  changeScrollTopShow(e) {
+    if (document.documentElement.scrollTop > 100) {
+      dispatch(actionCreators.toggleTopShow(true));
+    } else {
+      dispatch(actionCreators.toggleTopShow(false));
+    }
   }
 });
-export default connect(null, mapDispatch)(Home);
+export default connect(mapState, mapDispatch)(Home);
