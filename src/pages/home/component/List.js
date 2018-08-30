@@ -12,7 +12,16 @@ class List extends Component {
         {
           list.map((item, index) => {
             return (
-              <Link key={index} to={'/detail'}>
+              /**
+               * 方式1：'/detail?id=' + item.get('id')
+               * App.js路由匹配： /detail
+               * detail/index.js页面获取参数： this.props.location.search
+               *
+               * 方式2： '/detail/' + item.get('id)
+               * App.js路由匹配： /deatil/:id
+               * detail/index页面获取参数： this.props.match.params.id
+               */
+              <Link key={index} to={'/detail/' + item.get('id')}>
                 <ListItem key={index}>
                   <img className={'pic'}
                        src={item.get('imgUrl')}
