@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 class Write extends PureComponent {
   render() {
     const {loginStatus} = this.props;
-    console.log(loginStatus);
     if (!loginStatus) {
       return <Redirect to={'/login'}/>
     } else {
