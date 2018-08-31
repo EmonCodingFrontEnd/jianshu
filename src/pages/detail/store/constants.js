@@ -1,1 +1,1 @@
-export const CHANGE_DETAIL = 'home/change_detail';
+export const CHANGE_DETAIL = 'detail/change_detail';
